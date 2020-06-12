@@ -97,6 +97,13 @@ class AllUsers extends React.Component {
       this.fetchUsers();
       }
     });
+     firebase
+      .database()
+      .ref("newUsers").on("value", snapshot => {
+        if (snapshot && snapshot.val()) {
+          this.fetchUsers();
+        }
+      });
   }
   fetchUsers() {
     console.log("asdkjn");
