@@ -98,7 +98,6 @@ class AllUsersSignaled extends React.Component {
       .ref("signalUsers")
       .on("value", (snapshot) => {
         if (snapshot && snapshot.val()) {
-          alert("ra9")
           this.fetchUsers();
         }
       });
