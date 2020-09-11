@@ -70,7 +70,8 @@ componentWillMount(){
     this.setState({ backgroundColor: color });
   };
   render() {
-    if (!JSON.parse(localStorage.getItem("user"))){
+    if (!JSON.parse(localStorage.getItem("user"))||JSON.parse(localStorage.getItem("user")).role!=="ADMIN"){
+      localStorage.clear();
       return( <Redirect to={"/admin/login"} />)
      
     }

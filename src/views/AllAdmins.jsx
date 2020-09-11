@@ -246,7 +246,7 @@ class AllAdmins extends React.Component {
                     tooltip: "Bloquer",
                     onClick: (event, rowData) =>
                       this.bloquer(rowData),
-                    disabled: !rowData.isActive||rowData.id===this.state.user.id,
+                   disabled: !rowData.isActive||rowData.id===this.state.user.id,
                   }),
                   (rowData) => ({
                     icon: (e) => (

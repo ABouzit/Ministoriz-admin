@@ -392,7 +392,9 @@ class AllStorizEnAttante extends React.Component {
            <Col md={12} sm={12} lg={12}>
              {rowData.etatHistoire === "EN_ATTANTE" ? (
                <Badge color="secondary">EN_ATTENTE</Badge>
-             ) : rowData.etatHistoire === "VALIDE" ? (
+             ) : rowData.etatHistoire === "EN_ATTANTE_USER" ? (
+               <Badge color="warning">EN_ATTANTE_USER</Badge>
+             ): rowData.etatHistoire === "VALIDE" ? (
                <Badge color="success">VALIDE</Badge>
              ) : (
                <Badge color="danger">ARCHIVE</Badge>

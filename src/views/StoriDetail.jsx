@@ -133,13 +133,23 @@ class StoriDetail extends React.Component {
           if (snapshot && snapshot.val()) {
             Axios.get(config.API_URL + "impressions/histoire/" + id).then(
               (res) => {
-                this.setState({ commentaires: res.data });
+                this.setState({ commentaires: res.data },()=>{
+                  this.forceUpdate();
+                });
               }
             );
           }
         }); 
     }
     
+  }
+  deleteComment(id) {
+    Axios.delete(config.API_URL + 'impressions/admin/' + id).then(res => {
+      Axios.get(config.API_URL + "impressions/histoire/" + id).then((res) => {
+        console.log(res.data);
+        this.setState({ commentaires: res.data });
+      });
+    })
   }
   render() {
      const columns = [
@@ -903,7 +913,9 @@ class StoriDetail extends React.Component {
                             {this.state.histoire.etatHistoire ===
                             "EN_ATTANTE" ? (
                               <Badge color="secondary">EN_ATTENTE</Badge>
-                            ) : this.state.histoire.etatHistoire ===
+                              ) : this.state.histoire.etatHistoire ==="EN_ATTANTE_USER" ? (
+                                <Badge color="warning">EN_ATTANTE_USER</Badge>
+                              ) : this.state.histoire.etatHistoire ===
                               "VALIDE" ? (
                               <Badge color="success">VALIDE</Badge>
                             ) : (

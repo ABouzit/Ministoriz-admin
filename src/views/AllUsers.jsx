@@ -230,6 +230,17 @@ class AllUsers extends React.Component {
       },
       { title: "Pseudo", field: "pseudo" },
       { title: "Email", field: "email" },
+      {
+        title: "Date de creation",
+        field: "dateDeCreation",
+        type: "datetime",
+        render: (rowData) =>
+          rowData.dateDeCreation &&
+            moment(rowData.dateDeCreation)
+              .format("DD/MM/YYYY à HH:mm:ss")
+              .toString()
+            ,
+      },
       { title: "Nom", field: "nom" },
       { title: "Prenom", field: "prenom" },
       { title: "Ville", field: "ville" },

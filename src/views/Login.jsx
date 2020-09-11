@@ -56,7 +56,8 @@ class Login extends React.Component {
   }
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
+    if (user&&user.role==="ADMIN") {
+      localStorage.clear();
      this.props.history.push("/admin/dashboard/");
     }
   }

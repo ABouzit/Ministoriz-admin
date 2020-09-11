@@ -259,7 +259,14 @@ Axios.get(
   componentDidMount(){
     
   }
- 
+  deleteComment(id) {
+    Axios.delete(config.API_URL + 'impressions/admin/' + id).then(res => {
+      Axios.get(config.API_URL + "impressions/histoire/" + id).then((res) => {
+        console.log(res.data);
+        this.setState({ comments: res.data });
+      });
+    })
+  }
   
   stateUser(){
     if(!this.state.user.isActive){
@@ -745,6 +752,8 @@ Axios.get(
             <Col md={12} sm={12} lg={12}>
               {rowData.etatHistoire === "EN_ATTANTE" ? (
                 <Badge color="secondary">EN_ATTANTE</Badge>
+              ) : rowData.etatHistoire === "EN_ATTANTE_USER" ? (
+                  <Badge color="warning">EN_ATTANTE_USER</Badge>
               ) : rowData.etatHistoire === "VALIDE" ? (
                 <Badge color="success">VALIDE</Badge>
               ) : (

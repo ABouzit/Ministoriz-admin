@@ -427,7 +427,7 @@ class Header extends React.Component {
                         src={config.API_URL + "images/asset/logo.png"}
                       />
                       <p style={{ margin: 0, marginLeft: 26 }}>
-                        {this.state.user.pseudo}
+                        {this.state.user && this.state.user.pseudo ? this.state.user.pseudo : ""}
                       </p>
                     </NavLink>
 

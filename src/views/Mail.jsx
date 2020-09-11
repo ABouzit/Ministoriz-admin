@@ -116,9 +116,20 @@ class Mail extends React.Component {
   }
   render() {
     const columns = [
-      { title: 'Pseudo/Nom', field: 'pseudo' },
-      { title: 'Email', field: 'email' },
-      { title: 'Etat', field: 'repondue', render: (rowData) => this.stateUser(rowData), filtering: false, customSort: (a, b) => this.sort(a.repondue, b.repondue) },
+      {
+        title: "Date de Creation",
+        field: "dateDeCreation",
+        type: "datetime",
+      },
+      { title: "Pseudo/Nom", field: "pseudo" },
+      { title: "Email", field: "email" },
+      {
+        title: "Etat",
+        field: "repondue",
+        render: (rowData) => this.stateUser(rowData),
+        filtering: false,
+        customSort: (a, b) => this.sort(a.repondue, b.repondue),
+      },
     ];
     return (
       <>
@@ -196,6 +207,7 @@ class Mail extends React.Component {
                         </Button>
                       </p>
                     </Col>
+                    
                     <Col md={12}>
                       <p style={{ fontSize: 15, color: "#66615B" }}>{rowData.message}</p>
                     </Col>
@@ -208,6 +220,15 @@ class Mail extends React.Component {
                           <Divider style={{ width: "100%" }}/>
                           </Row>
                         <Row md={12} style={{ paddingBottom: 15 }}>
+                          <FormGroup row style={{ width: "100%" }}>
+                            <Label for="objet" xs={2} sm={2}>Objet</Label>
+                            <Col xs={1} sm={1} style={{paddingTop:7}}>:</Col>
+                            <Col sm={9} xs={9}>
+                              <Input type="text" name="text" id="objet" value={this.state.object} onChange={(object)=>this.setState({object:object.currentTarget.value})}/>
+                            </Col>
+                          </FormGroup>
+                          </Row>
+                          <Row md={12} style={{ paddingBottom: 15 }}>
                           <FormGroup row style={{ width: "100%" }}>
                             <Label for="objet" xs={2} sm={2}>Objet</Label>
                             <Col xs={1} sm={1} style={{paddingTop:7}}>:</Col>
