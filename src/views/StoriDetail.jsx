@@ -918,7 +918,9 @@ class StoriDetail extends React.Component {
                               ) : this.state.histoire.etatHistoire ===
                               "VALIDE" ? (
                               <Badge color="success">VALIDE</Badge>
-                            ) : (
+                                  ) : this.state.histoire.etatHistoir === "EN_ATTANTE_UPDATE" ? (
+                                    <Badge color="primary">EN_ATTANTE_UPDATE</Badge>
+                                  ) : (
                               <Badge color="danger">ARCHIVE</Badge>
                             )}
                           </Col>

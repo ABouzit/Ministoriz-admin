@@ -364,7 +364,9 @@ class AllStorizDemandeSuppression extends React.Component {
                   <Badge color="warning">EN_ATTANTE_USER"</Badge>
               ): rowData.etatHistoire === "VALIDE" ? (
                 <Badge color="success">VALIDE</Badge>
-              ) : (
+                  ) : rowData.etatHistoire === "EN_ATTANTE_UPDATE" ? (
+                    <Badge color="primary">EN_ATTANTE_UPDATE</Badge>
+                  ) : (
                 <Badge color="danger">ARCHIVE</Badge>
               )}
             </Col>

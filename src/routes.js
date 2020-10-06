@@ -37,7 +37,7 @@ import Mail from "views/Mail";
 var routes = [
   {
     path: "/dashboard",
-    name: "Acceuil",
+    name: "Accueil",
     icon: "nc-icon nc-bank",
     component: Dashboard,
     layout: "/admin",
@@ -78,6 +78,7 @@ var routes = [
         component: AllStorizDemandeSuppression,
         layout: "/admin",
       },
+     
     ],
   },
   {

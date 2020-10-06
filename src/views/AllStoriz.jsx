@@ -95,6 +95,18 @@ class AllStoriz extends React.Component {
     else if (!b) return -1
     else return a.pseudo.toLowerCase().localeCompare(b.pseudo.toLowerCase())
   }
+  modificationDelete(data){
+    Axios.delete(config.API_URL + "histoires/admin/updateNotValid/"+data.id).then(()=>{
+      this.fetchUsers();
+      this.forceUpdate();
+    });
+  }
+  modificationValide(data) {
+    Axios.put(config.API_URL + "histoires/admin/updateValide", data).then(() => {
+      this.fetchUsers();
+      this.forceUpdate();
+    });
+  }
   fetchUsers(){
     console.log('asdkjn')
     Axios.get(config.API_URL+'histoires').then(res=>{
@@ -601,6 +613,7 @@ class AllStoriz extends React.Component {
          VALIDE: "VALIDE",
          ARCHIVE: "ARCHIVE",
          EN_ATTANTE_USER: "EN_ATTANTE_USER",
+         EN_ATTANTE_UPDATE: "EN_ATTANTE_UPDATE",
        },
        render: (rowData) => (
          <Row>
@@ -611,7 +624,9 @@ class AllStoriz extends React.Component {
                  <Badge color="warning">EN_ATTANTE_USER</Badge>
                ) : rowData.etatHistoire === "VALIDE" ? (
                  <Badge color="success">VALIDE</Badge>
-               ) : (
+                 ) : rowData.etatHistoire === "EN_ATTANTE_UPDATE" ? (
+                     <Badge color="primary">EN_ATTANTE_UPDATE</Badge>
+                 ) : (
                <Badge color="danger">ARCHIVE</Badge>
              )}
            </Col>
@@ -691,9 +706,11 @@ class AllStoriz extends React.Component {
                         style={!e.disabled ? { color: "#ef8157" } : {}}
                       />
                     ),
-                    tooltip: "Archiver",
-                    onClick: (event, rowData) =>
-                      this.EditHistoire(rowData, "ARCHIVE"),
+                    tooltip: rowData.etatHistoire === "EN_ATTANTE_UPDATE" ? "Supprimer la modification" : "Archiver",
+                    onClick: (event, rowData) => {
+                      if (rowData.etatHistoire === "EN_ATTANTE_UPDATE") { this.modificationDelete(rowData) }
+                      else { this.EditHistoire(rowData, "VALIDE") }
+                    },
                     disabled: rowData.etatHistoire === "ARCHIVE",
                   }),
                   (rowData) => ({
@@ -702,12 +719,15 @@ class AllStoriz extends React.Component {
                         style={!e.disabled ? { color: "#6bd098" } : {}}
                       />
                     ),
-                    tooltip: "Valider",
-                    onClick: (event, rowData) =>
-                      this.EditHistoire(rowData, "VALIDE"),
+                    
+                    tooltip: rowData.etatHistoire === "EN_ATTANTE_UPDATE" ? "Valier la modification" : "Valider",
+                    onClick: (event, rowData) =>{
+                      if(rowData.etatHistoire==="EN_ATTANTE_UPDATE"){this.modificationValide(rowData)}
+                      else { this.EditHistoire(rowData, "VALIDE") }}
+                      ,
                     disabled:
                       rowData.etatHistoire !== "EN_ATTANTE" &&
-                      rowData.etatHistoire !== "ARCHIVE",
+                      rowData.etatHistoire !== "ARCHIVE" && rowData.etatHistoire !== "EN_ATTANTE_UPDATE",
                   }),
                 ]}
                 localization={translateTable.tabTranslation}

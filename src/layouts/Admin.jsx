@@ -52,9 +52,9 @@ componentWillMount(){
 }
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
-      this.props.history.push("/admin/Login/");
-    }
+    // if (!user) {
+    //   this.props.history.push("/admin/Login/");
+    // }
   }
   componentWillUnmount() {}
   componentDidUpdate(e) {
