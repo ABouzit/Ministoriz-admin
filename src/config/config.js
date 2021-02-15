@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5600/"; //LOCAL SERVER test
+const API_URL = "https://212.227.214.156/"; //LOCAL SERVER test
  //const API_URL = "https://www.apiministoriz.codemediastudioad.com/";
 // const API_URL = "https://www.apiministoriez2.code-square.net/";
 // const API_URL = "https://apiministoriz.code-square.net/";//SERVEUR
